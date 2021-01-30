@@ -1,12 +1,13 @@
 const dinoDiv = document.querySelector('.dinoImage');
 const backgroundDiv = document.querySelector('.gameBackground');
+const score = document.querySelector('.gameScore');
 
 //Verifica se o personagem está pulando
 let isJumping = false;
 //Marca a posição do personagem
 let position = 0;
-//Marca o recorde de distância
-let points = 0;
+//Marca a distancia percorrida
+var dist = 0;
 
 
 function handleKeyUp(event) {
@@ -67,10 +68,12 @@ function createCactus() {
         } else if (cactusPosition > 0 && cactusPosition < 60 && position < 60) {
             clearInterval(leftInterval);
             document.body.innerHTML = '<h1 class="gameOver">Game Over</h1>' +
-                '<p class="gameOver">Recorde: ' + points + '.</p>' +
+                '<p class="gameOver">Recorde: ' + dist + '.</p>' +
                 '<p class="gameOver">Pressione a tecla Enter para jogar novamente</p>'
 
         } else {
+            dist++;
+            score.textContent = dist;
             cactusPosition -= 10;
             cactus.style.left = cactusPosition + 'px';
         }
@@ -89,7 +92,6 @@ function gameLost(event) {
 
 
 }
-
 
 createCactus();
 document.addEventListener('keydown', handleKeyUp);
